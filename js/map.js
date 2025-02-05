@@ -290,7 +290,7 @@ function SendEmail(FromEmail, Message) {
   }
 
   $.ajax({
-    url: "http://eaoemail.appspot.com/",
+    url: "https://eaoemail.appspot.com/",
     method: "GET",
     data: {
       FromEmail: FromEmail,
