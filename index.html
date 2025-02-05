@@ -1,0 +1,114 @@
+<html lang="en">
+  <head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YH7JJ2GJXQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-YH7JJ2GJXQ');
+    </script>
+
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Kentucky Stuff</title>
+    <meta name="description" content="Off Trail Kentucky" />
+    <link rel="shortcut icon" type="image/png" href="images/favicon//favicon.ico" />
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.31/esri/themes/light/main.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+
+
+ 
+   
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+
+    <div id="infoDiv">
+    </div>
+    <div id="toolbarDiv" class="esri-component esri-widget">
+      <button
+        id="distance"
+        class="esri-widget--button esri-interactive esri-icon-measure-line"
+        title="Distance Measurement Tool"
+      ></button>
+    </div>
+
+
+     <!-- Splash Modal -->
+  <div class="modal fade" id="startupModal" tabindex="-1" role="dialog" aria-labelledby="startupModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="startupModalLabel">Kentucky Stuff</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          The Waterfall layer is the outstanding dataset gathered by Bill Fultz and Christopher Morris located here: <br/>  <a href="https://kywaterfalls.com/dir/index.php/waterfalls-map" target="_blank">Kentucky Waterfalls </a><p></p>
+          The KAT trail is the GPS tracks from the  <a href="https://www.facebook.com/groups/121845738390272KAT" target="_blank"> Facebook group </a> as of 1/18/2025.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="emailModalLabel">Contact Me</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="FromEmail">Your Email Address</label>
+                        <input type="email" class="form-control" id="FromEmail" name="FromEmail" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="Message">Message</label>
+                        <textarea class="form-control" id="Message" name="Message" rows="5" placeholder="Message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block" onclick="SendEmail($('#FromEmail').val(), $('#Message').val()); return false;">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  
+
+ 
+
+
+
+
+  </body>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="https://js.arcgis.com/4.31/"></script>
+  <script src="js/map-min.js"></script>
+
+
+</html>
