@@ -318,19 +318,4 @@ function SendEmail(FromEmail, Message) {
 
 
 
-
-
-// function SendEmail(FromEmail, Message) {
-
-//   $.ajax({
-//       url: "http://eaoemail.appspot.com/?FromEmail=" + FromEmail + "&Message=" + Message
-//   })
-
-
-//   $('#FromEmail').val(); 
-//   $('#Message').val(); 
-
-//   $('#emailModal').modal('hide'); 
-//   expandWidget.collapse();
-
-// }
+ 
