@@ -59,8 +59,7 @@ async function startMap() {
       container: "viewDiv"
     });
 
-    // esriId.registerToken
-    
+   
   
     const popupTemplate = {
       title: "{name}", 
