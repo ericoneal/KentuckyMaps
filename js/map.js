@@ -61,7 +61,7 @@ require([
  
 
   webmap.when(() => {
-    console.log("WebMap is loaded");
+   //console.log("WebMap is loaded");
 
       // // Add WebTileLayer for Strava Heatmap
       // const stravaHeatmap = new WebTileLayer({
@@ -74,8 +74,8 @@ require([
 
     // Access layers
     webmap.layers.forEach((layer) => {
-      console.log("Layer title:", layer.title);
-      console.log("Layer ID:", layer.id);
+     //console.log("Layer title:", layer.title);
+     //console.log("Layer ID:", layer.id);
 
       const excludedLayerTitles = ["World Dark Gray Reference", "World Dark Gray Base", "Kentucky", "States"];
       if (excludedLayerTitles.includes(layer.title)) {
@@ -92,9 +92,9 @@ require([
     // Get a specific layer by ID
     const specificLayer = webmap.findLayerById("layerIdHere");
     if (specificLayer) {
-      console.log("Found specific layer:", specificLayer.title);
+     //console.log("Found specific layer:", specificLayer.title);
     } else {
-      console.log("Layer not found.");
+     //console.log("Layer not found.");
     }
   }).catch((error) => {
     console.error("Error loading WebMap:", error);
