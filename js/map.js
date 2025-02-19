@@ -70,7 +70,7 @@ require([
       //   opacity: 0.8
       // });
 
-      webmap.add(stravaHeatmap);
+      // webmap.add(stravaHeatmap);
 
     // Access layers
     webmap.layers.forEach((layer) => {
