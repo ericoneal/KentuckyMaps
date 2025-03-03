@@ -22,7 +22,7 @@ require([
   "esri/widgets/Search"], 
   (MapView, WebMap, Home, Track, LayerList, Measurement, Expand, Swipe, FeatureLayer, WebTileLayer, Search) => {
 
-
+ 
     $('#startupModal').modal('show'); 
 
 
@@ -175,20 +175,11 @@ $("#closeExpandButton").on("click", function() {
 
   const searchWidget = new Search({
     view: view,
-    includeDefaultSources: false,
+    includeDefaultSources: true,
     searchAllEnabled: false,
     resultGraphicEnabled: false,
     sources: [
-      {
-        name: "Address Search",
-        placeholder: "",
-        apiKey: "AAPTxy8BH1VEsoebNVZXo8HurAV31S2Y-Y-6Okd3ngyrprAvQy8rginxsJv4Kbu4GT3jnN_b-kx6-e8OpIRvzrj9O2snc1E3aDQRgD522q7E93_mgRDqsGCF184EDK1JCe2ZStk0W5YDRe8tqIYhhiRGzZ4GqrKzKbbFoRkACv9zaza0pUo_0CNXhYc7O7qNnLBlnr0kr9QiXmyBzlI9Ah5vwvBYpOt6xL5gGhOnxsItzVw.AT1_EV7usvwf",
-        singleLineFieldName: "SingleLine",
-        url: "https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer",
-         placeholder: "Address"
-      }
-
-    ,
+     
       {
         layer: FLWaterfalls,
         searchFields: ["Name"],
