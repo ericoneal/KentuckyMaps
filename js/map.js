@@ -182,10 +182,10 @@ $("#closeExpandButton").on("click", function() {
      
       {
         layer: FLWaterfalls,
-        searchFields: ["Name"],
-        displayField: "Name",
+        searchFields: ["name"],
+        displayField: "name",
         exactMatch: false,
-        outFields: ["Name"],
+        outFields: ["name"],
         name: "Waterfall",
         placeholder: "Waterfall Name"
       }
