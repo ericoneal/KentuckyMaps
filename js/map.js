@@ -56,6 +56,13 @@ require([
     popupEnabled: true,
     popupTemplate: popupTemplate  
   });
+  const FLRRGTrails = new FeatureLayer({
+    portalItem: {
+      id: "0b0074df55b444849d43e1e17f3e1426"  
+    },
+    popupEnabled: true,
+    popupTemplate: popupTemplate  
+  });
 
 
  
@@ -77,7 +84,7 @@ require([
      //console.log("Layer title:", layer.title);
      //console.log("Layer ID:", layer.id);
 
-      const excludedLayerTitles = ["World Dark Gray Reference", "World Dark Gray Base", "Kentucky", "States"];
+      const excludedLayerTitles = ["World Dark Gray Reference", "World Dark Gray Base", "Kentucky", "States", "USA - States"];
       if (excludedLayerTitles.includes(layer.title)) {
         layer.listMode = 'hide';
       }
@@ -188,6 +195,15 @@ $("#closeExpandButton").on("click", function() {
         outFields: ["name"],
         name: "Waterfall",
         placeholder: "Waterfall Name"
+      },
+      {
+        layer: FLRRGTrails,
+        searchFields: ["Label"],
+        displayField: "Label",
+        exactMatch: false,
+        outFields: ["Label"],
+        name: "RRG Trails",
+        placeholder: "Trail Name"
       }
     ]
 
