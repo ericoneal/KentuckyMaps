@@ -198,10 +198,10 @@ $("#closeExpandButton").on("click", function() {
       },
       {
         layer: FLRRGTrails,
-        searchFields: ["Label"],
-        displayField: "Label",
+        searchFields: ["FIRST_name"],
+        displayField: "FIRST_name",
         exactMatch: false,
-        outFields: ["Label"],
+        outFields: ["FIRST_name"],
         name: "RRG Trails",
         placeholder: "Trail Name"
       }
