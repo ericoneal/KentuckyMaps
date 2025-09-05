@@ -96,7 +96,33 @@
 
   
 
- 
+<!-- Coordinate Input Modal -->
+<div class="modal fade" id="xyModal" tabindex="-1" role="dialog" aria-labelledby="xyModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="xyModalLabel">Add Rain Monitoring Location</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputName">Place Name</label>
+          <input type="text" class="form-control" id="inputName" placeholder="Enter a name">  
+          <p></p>
+          <label for="inputToken">Rain Token</label>
+          <input type="text" class="form-control" id="inputToken" placeholder="Enter a token">
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button id="submitXY" type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -109,6 +135,7 @@
   
   <script src="https://js.arcgis.com/4.31/"></script>
   <script src="js/map.js"></script>
+   <script src="js/rainmonitor.js"></script>
 <!-- 
 
 <script>
