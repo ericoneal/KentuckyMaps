@@ -5,9 +5,9 @@ let isMeasureActive = false;
 let measurement;
 let distanceButton;
 let layerList;
-let rainmonitor_x = null;
-let rainmonitor_y = null;
-let lyrRainPoints = null;
+// let rainmonitor_x = null;
+// let rainmonitor_y = null;
+// let lyrRainPoints = null;
 const urlStates = 'https://gis.blm.gov/arcgis/rest/services/Cadastral/BLM_Natl_PLSS_CadNSDI/MapServer/0';
 
 require([
@@ -120,8 +120,8 @@ require([
  
 
      
-    // Find the layer by title or id
-    lyrRainPoints = webmap.layers.find(layer => layer.title ===  "Live Rain Monitoring");
+    // // Find the layer by title or id
+    // lyrRainPoints = webmap.layers.find(layer => layer.title ===  "Live Rain Monitoring");
  
 
 
@@ -134,17 +134,17 @@ require([
        listItemCreatedFunction: function (event) {
           const item = event.item;
 
-          if (item.layer.title === "Live Rain Monitoring") {
-            item.actionsSections = [
-              [
-                {
-                  title: "Create a Monitoring Point",
-                  icon: "pencil",
-                  id: "create-rain"
-                }
-              ]
-            ];
-          }
+          // if (item.layer.title === "Live Rain Monitoring") {
+          //   item.actionsSections = [
+          //     [
+          //       {
+          //         title: "Create a Monitoring Point",
+          //         icon: "pencil",
+          //         id: "create-rain"
+          //       }
+          //     ]
+          //   ];
+          // }
         }
     });
 
@@ -152,25 +152,25 @@ require([
     layerList.on("trigger-action", function(event) {
       const item = event.item;
 
-      if (item.layer.title === "Live Rain Monitoring" && event.action.id === "create-rain") {
+      // if (item.layer.title === "Live Rain Monitoring" && event.action.id === "create-rain") {
        
-        view.popupEnabled = false;
-        view.container.style.cursor = "crosshair";
+      //   view.popupEnabled = false;
+      //   view.container.style.cursor = "crosshair";
 
-        const clickHandler = view.on("click", function(evt) {
-          const point = evt.mapPoint;
-          clickedX = point.x;
-          clickedY = point.y;
+      //   const clickHandler = view.on("click", function(evt) {
+      //     const point = evt.mapPoint;
+      //     clickedX = point.x;
+      //     clickedY = point.y;
 
-          // Reset UI and show modal
-          view.container.style.cursor = "default";
-          view.popupEnabled = true;
-          clickHandler.remove();
+      //     // Reset UI and show modal
+      //     view.container.style.cursor = "default";
+      //     view.popupEnabled = true;
+      //     clickHandler.remove();
 
-          $('#inputName').val('');      // Clear any old input
-          $('#xyModal').modal('show');  // Show the modal
-        });
-      }
+      //     $('#inputName').val('');      // Clear any old input
+      //     $('#xyModal').modal('show');  // Show the modal
+      //   });
+      // }
     });
 
     const llExpand = new Expand({
@@ -198,7 +198,7 @@ require([
       $('#xyModal').modal('hide');
 
       // Call your custom jQuery-friendly function
-      Rainmonitoring_Put(name,token);
+      // Rainmonitoring_Put(name,token);
     });
 
   
