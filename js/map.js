@@ -108,8 +108,8 @@ require([
 
     // Access layers
     webmap.layers.forEach((layer) => {
-    //  console.log("Layer title:", layer.title);
-    //  console.log("Layer ID:", layer.id);
+     console.log("Layer title:", layer.title);
+     console.log("Layer ID:", layer.id);
 
       const excludedLayerTitles = ["World Dark Gray Reference", "World Dark Gray Base", "Kentucky", "States", "USA - States"];
       if (excludedLayerTitles.includes(layer.title)) {
