@@ -9,6 +9,7 @@ let layerList;
 // let rainmonitor_y = null;
 // let lyrRainPoints = null;
 const urlStates = 'https://gis.blm.gov/arcgis/rest/services/Cadastral/BLM_Natl_PLSS_CadNSDI/MapServer/0';
+const urlimagery = "https://kygisserver.ky.gov/arcgis/rest/services/WGS84WM_Services/Ky_Imagery_Phase3_3IN_WGS84WM/MapServer";
 
 require([
   "esri/views/MapView", 
@@ -19,10 +20,13 @@ require([
   "esri/widgets/Measurement",
   "esri/widgets/Expand",
   "esri/widgets/Swipe",
+    "esri/Basemap",
+    "esri/widgets/BasemapToggle",
+      "esri/layers/TileLayer",
   "esri/layers/FeatureLayer",
   "esri/layers/WebTileLayer",
   "esri/widgets/Search"], 
-  (MapView, WebMap, Home, Track, LayerList, Measurement, Expand, Swipe, FeatureLayer, WebTileLayer, Search) => {
+  (MapView, WebMap, Home, Track, LayerList, Measurement, Expand, Swipe, Basemap, BasemapToggle,TileLayer,FeatureLayer, WebTileLayer, Search) => {
 
  
     $('#startupModal').modal('show'); 
@@ -34,7 +38,8 @@ require([
 
   const webmap = new WebMap({
     portalItem: {
-      id: "b2f63c76af8b45cc88905994e07a7b37"
+      id: "b2f63c76af8b45cc88905994e07a7b37" //PROD
+      //  id: "18c6e2b2024b4f0d92fdeec7403e2405"  //TEST
     }
   });
 
@@ -70,6 +75,20 @@ require([
     popupTemplate: popupTemplate  
   });
 
+
+    var imagery =  new TileLayer({
+       url: urlimagery,
+       id: 'Imagery'
+    })
+
+ 
+    basemap_imagery = new Basemap({
+        baseLayers: [imagery],
+        title: "Imagery",
+        id: "basemap_imagery",
+        thumbnailUrl: "images/basemap_street.png"
+    });
+
  
 
 
@@ -89,8 +108,8 @@ require([
 
     // Access layers
     webmap.layers.forEach((layer) => {
-     //console.log("Layer title:", layer.title);
-     //console.log("Layer ID:", layer.id);
+    //  console.log("Layer title:", layer.title);
+    //  console.log("Layer ID:", layer.id);
 
       const excludedLayerTitles = ["World Dark Gray Reference", "World Dark Gray Base", "Kentucky", "States", "USA - States"];
       if (excludedLayerTitles.includes(layer.title)) {
@@ -105,21 +124,20 @@ require([
     });
 
     // Get a specific layer by ID
-    const specificLayer = webmap.findLayerById("layerIdHere");
-    if (specificLayer) {
-     //console.log("Found specific layer:", specificLayer.title);
-    } else {
-     //console.log("Layer not found.");
-    }
-  }).catch((error) => {
-    console.error("Error loading WebMap:", error);
+  //   const specificLayer = webmap.findLayerById("layerIdHere");
+  //   if (specificLayer) {
+  //    //console.log("Found specific layer:", specificLayer.title);
+  //   } else {
+  //    //console.log("Layer not found.");
+  //   }
+  // }).catch((error) => {
+  //   console.error("Error loading WebMap:", error);
   });
 
   view.when(() => {
 
  
 
-     
     // // Find the layer by title or id
     // lyrRainPoints = webmap.layers.find(layer => layer.title ===  "Live Rain Monitoring");
  
@@ -133,6 +151,12 @@ require([
       view: view,
        listItemCreatedFunction: function (event) {
           const item = event.item;
+          console.log(item.layer.id);
+            if (item.layer.id === "19746566705-layer-23") {
+              item.visible = false;   // Hide from list
+              item.panel = null;      // Optional: disable sublayer actions
+              event.item.layer.listMode = "hide"; // ensures it won’t appear at all
+            }
 
           // if (item.layer.title === "Live Rain Monitoring") {
           //   item.actionsSections = [
@@ -149,8 +173,23 @@ require([
     });
 
 
+
+
+
+        // Add widget to the top right corner of the view
+      //  view.ui.add(toggle, "bottom-right");
+
+
+
+
     layerList.on("trigger-action", function(event) {
       const item = event.item;
+
+
+
+
+
+
 
       // if (item.layer.title === "Live Rain Monitoring" && event.action.id === "create-rain") {
        
@@ -172,6 +211,8 @@ require([
       //   });
       // }
     });
+
+    
 
     const llExpand = new Expand({
       view: view,
@@ -310,12 +351,55 @@ $("#closeExpandButton").on("click", function() {
 
 
 
+
+
+
+           
+  // var toggle = new BasemapToggle({
+  //   view: view,  
+  //   nextBasemap: basemap_imagery
+  // });
+
+    // const basemapExpand = new Expand({
+    //   view: view,
+    //   content: toggle,
+    //   expanded: false
+    // });
+    // view.ui.add(basemapExpand, "top-right");
+
+
+
+  const toggleImagery = document.createElement("button");
+  toggleImagery.className = "esri-widget esri-component esri-icon-basemap";
+  toggleImagery.style.padding = "8px";
+  toggleImagery.style.cursor = "pointer";
+  view.ui.add(toggleImagery, "top-right");
+  toggleImagery.addEventListener("click", showImagery);
+
+  
+
+  function showImagery() {
+    const lyrImagery = webmap.findLayerById("19746566705-layer-23");
+
+    if (!lyrImagery) {
+      console.warn("Imagery layer not found");
+      return;
+    }
+
+    // Toggle visibility
+    lyrImagery.visible = !lyrImagery.visible;
+
+    console.log(`Imagery visibility set to: ${lyrImagery.visible}`);
+}
+
+
+
+
+
   const toggleButton = document.createElement("button");
   toggleButton.className = "esri-widget esri-component esri-icon-elevation-profile";
   toggleButton.style.padding = "8px";
   toggleButton.style.cursor = "pointer";
-
-
   view.ui.add(toggleButton, "top-right");
 
 
