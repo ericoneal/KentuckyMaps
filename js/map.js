@@ -5,11 +5,12 @@ let isMeasureActive = false;
 let measurement;
 let distanceButton;
 let layerList;
+let lyrImagery;
 // let rainmonitor_x = null;
 // let rainmonitor_y = null;
 // let lyrRainPoints = null;
-const urlStates = 'https://gis.blm.gov/arcgis/rest/services/Cadastral/BLM_Natl_PLSS_CadNSDI/MapServer/0';
-const urlimagery = "https://kygisserver.ky.gov/arcgis/rest/services/WGS84WM_Services/Ky_Imagery_Phase3_3IN_WGS84WM/MapServer";
+// const urlStates = 'https://gis.blm.gov/arcgis/rest/services/Cadastral/BLM_Natl_PLSS_CadNSDI/MapServer/0';
+// const urlimagery = "https://kygisserver.ky.gov/arcgis/rest/services/WGS84WM_Services/Ky_Imagery_Phase3_3IN_WGS84WM/MapServer";
 
 require([
   "esri/views/MapView", 
@@ -20,13 +21,14 @@ require([
   "esri/widgets/Measurement",
   "esri/widgets/Expand",
   "esri/widgets/Swipe",
+   "esri/widgets/Slider",
     "esri/Basemap",
     "esri/widgets/BasemapToggle",
       "esri/layers/TileLayer",
   "esri/layers/FeatureLayer",
   "esri/layers/WebTileLayer",
   "esri/widgets/Search"], 
-  (MapView, WebMap, Home, Track, LayerList, Measurement, Expand, Swipe, Basemap, BasemapToggle,TileLayer,FeatureLayer, WebTileLayer, Search) => {
+  (MapView, WebMap, Home, Track, LayerList, Measurement, Expand, Swipe,Slider, Basemap, BasemapToggle,TileLayer,FeatureLayer, WebTileLayer, Search) => {
 
  
     $('#startupModal').modal('show'); 
@@ -38,8 +40,8 @@ require([
 
   const webmap = new WebMap({
     portalItem: {
-      id: "b2f63c76af8b45cc88905994e07a7b37" //PROD
-      //  id: "18c6e2b2024b4f0d92fdeec7403e2405"  //TEST
+      // id: "b2f63c76af8b45cc88905994e07a7b37" //PROD
+       id: "18c6e2b2024b4f0d92fdeec7403e2405"  //TEST
     }
   });
 
@@ -76,18 +78,18 @@ require([
   });
 
 
-    var imagery =  new TileLayer({
-       url: urlimagery,
-       id: 'Imagery'
-    })
-
+  
+  // imagery =  new TileLayer({
+  //    url: urlimagery,
+  //    id: 'Imagery'
+  // })
  
-    basemap_imagery = new Basemap({
-        baseLayers: [imagery],
-        title: "Imagery",
-        id: "basemap_imagery",
-        thumbnailUrl: "images/basemap_street.png"
-    });
+  //   basemap_imagery = new Basemap({
+  //       baseLayers: [imagery],
+  //       title: "Imagery",
+  //       id: "basemap_imagery",
+  //       thumbnailUrl: "images/basemap_street.png"
+  //   });
 
  
 
@@ -140,7 +142,7 @@ require([
 
     // // Find the layer by title or id
     // lyrRainPoints = webmap.layers.find(layer => layer.title ===  "Live Rain Monitoring");
- 
+ MakeImageryControls(view);
 
 
     view.constraints.geometry = view.extent; 
@@ -379,7 +381,7 @@ $("#closeExpandButton").on("click", function() {
   
 
   function showImagery() {
-    const lyrImagery = webmap.findLayerById("19746566705-layer-23");
+    lyrImagery = webmap.findLayerById("19746566705-layer-23");
 
     if (!lyrImagery) {
       console.warn("Imagery layer not found");
@@ -390,9 +392,75 @@ $("#closeExpandButton").on("click", function() {
     lyrImagery.visible = !lyrImagery.visible;
 
     console.log(`Imagery visibility set to: ${lyrImagery.visible}`);
+
+      // Show or hide the slider based on visibility
+    const slider = document.getElementById("imageryslider");
+ 
+    if (slider) {
+       lyrImagery.opacity = 0.5;
+        slider.style.display = lyrImagery.visible ? "block" : "none";
+    }
+
+
 }
 
 
+
+
+
+function MakeImageryControls(view){
+
+
+    // --- Imagery control container (slider + button) ---
+    const imageryControl = document.createElement("div");
+    imageryControl.className = "esri-widget esri-component";
+    imageryControl.style.display = "flex";
+    // imageryControl.style.alignItems = "center";
+    // imageryControl.style.padding = "4px";
+    imageryControl.style.background = "transparent";   // <-- transparent background
+    imageryControl.style.boxShadow = "none";           // optional: remove widget shadow
+    imageryControl.style.border = "none";              // optional: remove border
+
+    // --- Slider (left side) ---
+    const imagerySlider = document.createElement("input");
+    imagerySlider.type = "range";
+    imagerySlider.min = "0";
+    imagerySlider.max = "1";
+    imagerySlider.step = "0.1";
+    imagerySlider.value = "0.5";       
+    imagerySlider.id = 'imageryslider';
+    imagerySlider.style.display = "none";
+ 
+    imagerySlider.style.marginRight = "8px";  // space before the button
+    imagerySlider.style.marginBottom = "8px";  // space before the button
+
+
+    imagerySlider.addEventListener("input", () => {
+        if (lyrImagery) {
+            lyrImagery.opacity = parseFloat(imagerySlider.value);
+            console.log(lyrImagery.opacity);
+        }
+    });
+
+    // // --- Button (right side) ---
+    // const toggleImagery = document.createElement("button");
+    // toggleImagery.className = "esri-widget esri-component esri-icon-basemap";
+    // toggleImagery.style.padding = "8px";
+    // toggleImagery.style.cursor = "pointer";
+    // toggleImagery.title = "Toggle Imagery";
+
+    toggleImagery.addEventListener("click", showImagery);
+
+    // --- Put slider + button into the container in LEFT→RIGHT order ---
+    imageryControl.appendChild(imagerySlider);   // left
+    imageryControl.appendChild(toggleImagery);   // right
+ 
+    // --- Add the whole thing to the map UI ---
+    view.ui.add(imageryControl, "top-right");
+
+
+
+}
 
 
 

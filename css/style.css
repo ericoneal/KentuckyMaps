@@ -10,7 +10,7 @@ body,
 
 #toolbarDiv {
   position: absolute;
-  top: 195px;
+  top: 190px;
   right: 15px;
   cursor: default;
   display: flex;
@@ -63,4 +63,9 @@ body,
 
   .btn-blue:hover {
     background-color: #0056b3; /* Darker blue on hover */
+  }
+
+
+  .esri-ui-top-right .esri-component{
+        margin-bottom: 5px !important;
   }
