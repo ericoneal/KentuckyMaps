@@ -40,8 +40,8 @@ require([
 
   const webmap = new WebMap({
     portalItem: {
-      // id: "b2f63c76af8b45cc88905994e07a7b37" //PROD
-       id: "18c6e2b2024b4f0d92fdeec7403e2405"  //TEST
+      id: "b2f63c76af8b45cc88905994e07a7b37" //PROD
+      //  id: "18c6e2b2024b4f0d92fdeec7403e2405"  //TEST
     }
   });
 
