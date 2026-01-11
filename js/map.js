@@ -113,7 +113,7 @@ require([
      console.log("Layer title:", layer.title);
      console.log("Layer ID:", layer.id);
 
-      const excludedLayerTitles = ["World Dark Gray Reference", "World Dark Gray Base", "Kentucky", "States", "USA - States"];
+      const excludedLayerTitles = ["World Dark Gray Reference", "World Dark Gray Base", "Elevation", "Hillshade", "Kentucky", "States", "USA - States"];
       if (excludedLayerTitles.includes(layer.title)) {
         layer.listMode = 'hide';
       }
@@ -143,7 +143,7 @@ require([
     // // Find the layer by title or id
     // lyrRainPoints = webmap.layers.find(layer => layer.title ===  "Live Rain Monitoring");
  MakeImageryControls(view);
-
+Set_Elevation_Transparent();
 
     view.constraints.geometry = view.extent; 
  
@@ -339,7 +339,7 @@ $("#closeExpandButton").on("click", function() {
   searchWidget.on("select-result", function(event) {
     if(event.source.name == "Waterfall"){
       for(var i=0;i<=layerList.operationalItems.items.length -1;i++){
-        if(layerList.operationalItems.items[0].title == "Kentucky Waterfalls"){
+        if(layerList.operationalItems.items[0].title == "Waterfalls"){
           layerList.operationalItems.items[0].visible = true;
         }
       }
@@ -403,6 +403,11 @@ $("#closeExpandButton").on("click", function() {
 
 
 }
+
+
+
+
+
 
 
 
@@ -508,6 +513,9 @@ function MakeImageryControls(view){
     }
   }
 
+
+
+
   function distanceMeasurement() {
     
     if(isMeasureActive == false){
@@ -524,6 +532,21 @@ function MakeImageryControls(view){
   }
 
 
+
+
+  
+function Set_Elevation_Transparent() {
+    lyrDEM = webmap.findLayerById("19baad09b71-layer-24");
+
+    if (!lyrDEM) {
+      console.warn("DEM layer not found");
+      return;
+    }
+
+    // Toggle opacity
+    lyrDEM.opacity = 0;
+
+}
 
 });
 
