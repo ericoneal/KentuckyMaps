@@ -25,10 +25,8 @@ require([
   "esri/widgets/Legend",
   "esri/layers/FeatureLayer",
   "esri/request",
-      "esri/rest/imageService",
-    "esri/rest/support/ImageIdentifyParameters",
   "esri/widgets/Search"], 
-  (MapView, WebMap, Home, Track, LayerList, Measurement, Expand, Swipe, Legend, FeatureLayer, esriRequest, imageService, ImageIdentifyParameters, Search) => {
+  (MapView, WebMap, Home, Track, LayerList, Measurement, Expand, Swipe, Legend, FeatureLayer, esriRequest, Search) => {
 
  
     $('#startupModal').modal('show'); 
@@ -36,20 +34,6 @@ require([
 
  
  
-
-
-  const webmap = new WebMap({
-    portalItem: {
-      id: "b2f63c76af8b45cc88905994e07a7b37" //PROD
-      //  id: "18c6e2b2024b4f0d92fdeec7403e2405"  //TEST
-    }
-  });
-
-
-  const view = new MapView({
-    map: webmap,
-    container: "viewDiv"
-  });
 
  
  
@@ -94,6 +78,24 @@ require([
     popupEnabled: true,
     popupTemplate: popupTemplate  
   });
+
+
+
+  
+
+  const webmap = new WebMap({
+    portalItem: {
+      id: "b2f63c76af8b45cc88905994e07a7b37" //PROD
+      //  id: "18c6e2b2024b4f0d92fdeec7403e2405"  //TEST
+    }
+  });
+
+
+  const view = new MapView({
+    map: webmap,
+    container: "viewDiv"
+  });
+
 
 
   var readout = document.getElementById("elevationReadout");
@@ -172,14 +174,6 @@ require([
           return;
         }
 
-
-        // elevationLayer.load().then(function () {
-        //   console.log("title:", elevationLayer.title);
-        //   console.log("type:", elevationLayer.type);
-        //   console.log("url:", elevationLayer.url);
-        //   console.log("layer:", elevationLayer);
-        //   updateElevationValue();
-        // });
 
     // // Find the layer by title or id
     // lyrRainPoints = webmap.layers.find(layer => layer.title ===  "Live Rain Monitoring");
