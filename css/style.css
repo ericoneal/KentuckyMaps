@@ -19,6 +19,36 @@ body,
   z-index: 0;
 }
 
+
+
+
+#elevationReadout {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  z-index: 200;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  border-radius: 6px;
+  pointer-events: none;
+
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+#elevationReadout.visible {
+  opacity: 1;
+}
+
+#elevationReadout.fade-out {
+  opacity: 0;
+}
+  
+
 #infoDiv {
   position: absolute;
   top: 15px;
@@ -70,3 +100,4 @@ body,
   .esri-ui-top-right .esri-component{
         margin-bottom: 5px !important;
   }
+
