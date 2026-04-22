@@ -48,7 +48,7 @@ require([
 
   const FLWaterfalls = new FeatureLayer({
     portalItem: {
-      id: "38bb0649fae84c4ebacaacf8e0ffcb7a"  
+      id: "8907f637b54b4a059f39ac8eeb82975d"  
     },
     popupEnabled: true,
     popupTemplate: popupTemplate  
